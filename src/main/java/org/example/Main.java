@@ -2,37 +2,38 @@ package org.example;
 import java.util.HashMap;
 import java.util.Scanner;
 
+//   (rev - 28.11.2024 1:00)
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        Inventory inventory = new Inventory();
-        Scanner scanner = new Scanner(System.in);
 
+        Scanner scanner = new Scanner(System.in);
+        Inventory inventory = new Inventory();
 
         boolean running = true;
         while (running) {
-            prinyMenu();
+            inventory.printMenu();
             int choice = scanner.nextInt();
+
             switch (choice) {
-                case 1:
-                    //inventory.addProduct();
-
-
-
+                // розказати за -> чому не : ( оператор break НЕ ПОТРІБЕН)  з
+                case 1 -> {
+                    System.out.print("Enter product name: ");
+                    String product = scanner.nextLine();
+                    System.out.print("Enter product quantity: ");
+                    int quantity = scanner.nextInt();
+                    inventory.addProduct(product, quantity);
+                }
+                case 2 -> {
+                    System.out.println("Enter product name: ");
+                    String product = scanner.nextLine();
+                    System.out.print("Enter A NEW product quantity: ");
+                    int quantity = scanner.nextInt();
+                    inventory.addProduct(product, quantity);
+                }
             }
         }
-    }
-
-    //   (rev - 28.11.2024 1:00)
-    public static void prinyMenu() {
-        System.out.println("menu: ");
-        System.out.println("1. Add the product"); // реалізовано
-        System.out.println("2. Update the quantity"); // реалізовано
-        System.out.println("3. Delete the product");// реалізовано
-        System.out.println("4. show product quantity"); // реалізовано
-        System.out.println("5. Show products");
-        System.out.println("6. Product with the highest quantity");
-        System.out.println("7. Exit");
     }
 }
