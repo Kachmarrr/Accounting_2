@@ -1,11 +1,7 @@
 package org.example;
-import java.util.HashMap;
+
 import java.util.Scanner;
 
-//   (rev - 28.11.2024 1:00)
-
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
 
@@ -13,13 +9,17 @@ public class Main {
         Inventory inventory = new Inventory();
 
         boolean running = true;
+        inventory.printMenu();
         while (running) {
-            inventory.printMenu();
+            // питання по виводу, яе не засмічувати консоль
+
+            System.out.print("Ваш вибір: ");
             int choice = scanner.nextInt();
+            scanner.nextLine(); // Очистка буфера після nextInt()
 
             switch (choice) {
-                // розказати за -> чому не : ( оператор break НЕ ПОТРІБЕН)  з
-                case 1 -> {
+                // розказати за -> чому не : ( оператор break НЕ ПОТРІБЕН)
+                case 1 -> { //rev
                     System.out.print("Enter product name: ");
                     String product = scanner.nextLine();
                     System.out.print("Enter product quantity: ");
@@ -31,7 +31,26 @@ public class Main {
                     String product = scanner.nextLine();
                     System.out.print("Enter A NEW product quantity: ");
                     int quantity = scanner.nextInt();
-                    inventory.addProduct(product, quantity);
+                    inventory.updateProduct(product, quantity);
+                }
+                case 3 -> { //rev
+                    System.out.println("Enter product name: ");
+                    String product = scanner.nextLine();
+                    inventory.removeProduct(product);
+                }
+                case 4 -> { //rev
+                    System.out.println("Enter product name: ");
+                    String product = scanner.nextLine();
+                    inventory.showProductQuantity(product);
+                }
+                case 5 -> {
+                    inventory.showAllProducts();
+                }
+                case 6 -> {
+                    inventory.showMostAbundantProduct();
+                }
+                case 7 -> {
+                    running = false;
                 }
             }
         }
