@@ -72,17 +72,20 @@ public class Inventory {
     // метод для виведення товару якого найбільше на складі
     public void showMostAbundantProduct() {
         //запитати за isEmpty звідки це ?
+        //перевірка чи інвентар не порожній
         if (inventory.isEmpty()) {
             System.out.println("No products found");
             // чи потрібен тут return;
         }
+
         String maxProduct = Collections.max(inventory.entrySet(), Map.Entry.comparingByValue()).getKey();
+        ///  String maxProduct - ми створ.єсо змінну
+        ///  Collections.max - метод який шукає запис з найбільшим значенням
+        ///  .entrySet() - перетворює HashMap у набір пар ключ-значення (Map.Entry). - за ось це запитати
+        ///  Map.Entry.comparingByValue() — це компаратор, який порівнює записи за їх значенням (кількість товару).
+        ///  Collections.max(...) знаходить пару з найбільшим значенням.
+        ///  .getKey() отримує ключ (назва товару) з цієї пари.
         int maxQuantity = inventory.get(maxProduct);
         System.out.println("product: " + maxProduct + "\nQuantity: " + maxQuantity);
-    }
-
-    public static void clearConsole() {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
     }
 }
