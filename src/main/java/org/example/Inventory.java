@@ -1,6 +1,8 @@
 package org.example;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map;
 
 public class Inventory {
 
@@ -21,8 +23,8 @@ public class Inventory {
         System.out.println("3. Delete the product");// реалізовано
         System.out.println("4. show product quantity"); // реалізовано
         System.out.println("5. Show products");// реалізовано (30.11)
-        System.out.println("6. Product with the highest quantity");
-        System.out.println("7. Exit");
+        System.out.println("6. Product with the highest quantity"); // реалізовано (02.12)
+        System.out.println("7. Exit");// реалізовано (02.12)
     }
 
     public void addProduct(String product, int quantity) {
@@ -32,7 +34,7 @@ public class Inventory {
 
     public void updateProduct(String product, int quantity) {
         if (inventory.containsKey(product)) {
-            inventory.put(product, inventory.get(product) + quantity);
+            inventory.put(product, quantity);
             System.out.println("product updated: " + product);
         } else {
             System.out.println("product not found" + product);
@@ -50,7 +52,7 @@ public class Inventory {
 
     public void showProductQuantity(String product) {
         if (inventory.containsKey(product)) {
-            System.out.println("product quantity" + product + inventory.get(product));
+            System.out.println("product: " + product + "\nquantity: " + inventory.get(product));
         } else {
             System.out.println("product not found" + product);
         }
@@ -67,15 +69,20 @@ public class Inventory {
         }
     }
 
+    // метод для виведення товару якого найбільше на складі
     public void showMostAbundantProduct() {
         //запитати за isEmpty звідки це ?
         if (inventory.isEmpty()) {
             System.out.println("No products found");
             // чи потрібен тут return;
         }
-
-
+        String maxProduct = Collections.max(inventory.entrySet(), Map.Entry.comparingByValue()).getKey();
+        int maxQuantity = inventory.get(maxProduct);
+        System.out.println("product: " + maxProduct + "\nQuantity: " + maxQuantity);
     }
 
-
+    public static void clearConsole() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
 }
